@@ -14,7 +14,7 @@ class _ChartScreenState extends State<ChartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chart'),
+        title: const Text('Chart'),
         backgroundColor: Colors.blue,
       ),
       body: Column(
@@ -28,36 +28,35 @@ class _ChartScreenState extends State<ChartScreen> {
                     List<Map<String, dynamic>> data = snapshot.data ?? [];
                     int cash = 0;
                     for (int i = 1; i < data.length; i++) {
-                      cash =
-                          cash + int.parse(data[i]['money'].toString());
+                      cash = cash + int.parse(data[i]['money'].toString());
                     }
                     int save;
                     save = data[0]['money'] - cash;
-                    Map<String,double> dataMap = {
-                      'Saving' : double.parse(save.toString()),
+                    Map<String, double> dataMap = {
+                      'Saving': double.parse(save.toString()),
                     };
-                    for(int i=1;i<data.length;i++){
-                      dataMap[data[i]['name']] = double.parse(data[i]['money'].toString());
+                    for (int i = 1; i < data.length; i++) {
+                      dataMap[data[i]['name']] =
+                          double.parse(data[i]['money'].toString());
                     }
-                    if(cash<=data[0]['money']){
+                    if (cash <= data[0]['money']) {
                       return Column(
                         children: [
                           PieChart(
                             dataMap: dataMap,
                             chartType: ChartType.disc,
-                            chartValuesOptions: ChartValuesOptions(
+                            chartValuesOptions: const ChartValuesOptions(
                               showChartValuesInPercentage: true,
                             ),
-                            legendOptions: LegendOptions(
+                            legendOptions: const LegendOptions(
                               legendPosition: LegendPosition.bottom,
                             ),
                             ringStrokeWidth: 30,
                           ),
                         ],
                       );
-                    }
-                    else{
-                      return Center(
+                    } else {
+                      return const Center(
                         child: Text('Budget is lower than expenditure'),
                       );
                     }

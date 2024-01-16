@@ -5,8 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class DatabaseHelper{
-
+class DatabaseHelper {
   static final _databasename = 'expense. ';
   static final version = 1;
 
@@ -15,7 +14,7 @@ class DatabaseHelper{
   static final expenseName = 'name';
   static final expenseMoney = 'money';
 
-  static Database?  _database;
+  static Database? _database;
 
   DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
@@ -33,7 +32,6 @@ class DatabaseHelper{
       }
     }
   }
-
 
   initDatabase() async {
     try {
@@ -72,28 +70,22 @@ class DatabaseHelper{
     }
   }
 
-
-
-  Future<List<Map<String,dynamic>>> queryAll() async {
+  Future<List<Map<String, dynamic>>> queryAll() async {
     Database? db = await instance.database;
-    if(db!=null){
+    if (db != null) {
       return await db.query(_tablename);
-    }
-    else{
-      return [{
-        Colid: 0,
-        expenseName : 'No Data',
-        expenseMoney: 0
-      }];
+    } else {
+      return [
+        {Colid: 0, expenseName: 'No Data', expenseMoney: 0}
+      ];
     }
   }
-
 
   Future<List<Map<String, dynamic>>> query(int id) async {
     Database? db = await instance.database;
     if (db != null) {
       List<Map<String, dynamic>> result =
-      await db.query(_tablename, where: '$Colid = ?', whereArgs: [id]);
+          await db.query(_tablename, where: '$Colid = ?', whereArgs: [id]);
       return result;
     } else {
       return [
@@ -106,23 +98,22 @@ class DatabaseHelper{
     }
   }
 
-  Future<int> update(Map<String,dynamic> row) async {
+  Future<int> update(Map<String, dynamic> row) async {
     Database? db = await instance.database;
-    if(db!=null){
+    if (db != null) {
       int id = row[Colid] ?? 0;
-      return await db.update(_tablename, row ,where: '$Colid = ?',whereArgs: [id] );
-    }
-    else{
+      return await db
+          .update(_tablename, row, where: '$Colid = ?', whereArgs: [id]);
+    } else {
       return 0;
     }
   }
 
   Future<int> delete(int id) async {
     Database? db = await instance.database;
-    if(db!=null){
-      return await db.delete(_tablename ,where: '$Colid = ?',whereArgs: [id] );
-    }
-    else{
+    if (db != null) {
+      return await db.delete(_tablename, where: '$Colid = ?', whereArgs: [id]);
+    } else {
       return 0;
     }
   }

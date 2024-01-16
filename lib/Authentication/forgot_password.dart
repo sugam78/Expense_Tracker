@@ -17,7 +17,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reset Password'),
+        title: const Text('Reset Password'),
         backgroundColor: Colors.blue,
       ),
       body: Column(
@@ -28,24 +28,24 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               hintText: 'Enter your email address',
-              prefixIcon: Icon(Icons.email_outlined),
+              prefixIcon: const Icon(Icons.email_outlined),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(width: 1),
+                borderSide: const BorderSide(width: 1),
               ),
             ),
           ),
           ReusuableButton(
               title: 'Continue',
-              onTap: (){
-                auth.sendPasswordResetEmail(
-                    email: email.text.toString()).then((value) {
-                      Utilities().toastMesssage('Code sent. Check your email');
+              onTap: () {
+                auth
+                    .sendPasswordResetEmail(email: email.text.toString())
+                    .then((value) {
+                  Utilities().toastMesssage('Code sent. Check your email');
                 }).onError((error, stackTrace) {
                   Utilities().toastMesssage(error.toString());
                 });
-              }
-          ),
+              }),
         ],
       ),
     );

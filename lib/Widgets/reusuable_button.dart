@@ -4,7 +4,11 @@ class ReusuableButton extends StatelessWidget {
   String title;
   bool loading;
   final VoidCallback onTap;
-  ReusuableButton({super.key,required this.title,required this.onTap,this.loading = false});
+  ReusuableButton(
+      {super.key,
+      required this.title,
+      required this.onTap,
+      this.loading = false});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,11 @@ class ReusuableButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Center(
-          child: loading?CircularProgressIndicator(color: Colors.white,):Text(title),
+          child: loading
+              ? const CircularProgressIndicator(
+                  color: Colors.white,
+                )
+              : Text(title),
         ),
       ),
     );
